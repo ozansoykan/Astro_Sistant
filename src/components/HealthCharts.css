@@ -1,0 +1,126 @@
+.health-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chart {
+  margin: 0;
+}
+
+.chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+}
+
+.chart-title {
+  color: var(--muted);
+}
+
+.chart-legend {
+  display: flex;
+  gap: 10px;
+  color: var(--text);
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chart-swatch {
+  width: 10px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.chart-body {
+  position: relative;
+}
+
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: crosshair;
+}
+
+.chart-grid {
+  stroke: #232c4a;
+  stroke-width: 1;
+}
+
+.chart-axis {
+  font-size: 9px;
+  fill: var(--muted);
+}
+
+.chart-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart-end,
+.chart-dot {
+  stroke: var(--card);
+  stroke-width: 2;
+}
+
+.chart-label {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text);
+}
+
+.chart-crosshair {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.chart-tooltip {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  min-width: 120px;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  background: #0b1020;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.chart-tooltip-x {
+  margin-bottom: 4px;
+  color: var(--muted);
+}
+
+.chart-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-tooltip-row strong {
+  margin-left: auto;
+  padding-left: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.health-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}

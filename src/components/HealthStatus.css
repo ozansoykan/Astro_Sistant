@@ -1,0 +1,75 @@
+.status-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.status-card {
+  --status: #0ca30c;
+  padding: 14px;
+  background: rgba(11, 16, 32, 0.6);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--status);
+  border-radius: 10px;
+}
+
+.status-good {
+  --status: #0ca30c;
+}
+
+.status-warning {
+  --status: #fab219;
+}
+
+.status-serious {
+  --status: #ec835a;
+}
+
+.status-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.status-card-title {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.status-icon {
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  color: #0b1020;
+  background: var(--status);
+  border-radius: 50%;
+}
+
+.status-card-value {
+  margin: 6px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.status-card-text {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--muted);
+}

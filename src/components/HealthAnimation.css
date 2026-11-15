@@ -1,0 +1,432 @@
+.health-anim {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.anat-head {
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.panel-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.health-anim > .panel-title,
+.health-charts > .panel-title,
+.health-status > .panel-title {
+  margin-bottom: 4px;
+}
+
+.anat-tabs {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  background: rgba(11, 16, 32, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.anat-tab {
+  padding: 5px 12px;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.anat-tab:hover {
+  color: var(--text);
+}
+
+.anat-tab[aria-pressed='true'] {
+  color: #0b1020;
+  background: var(--accent);
+  font-weight: 600;
+}
+
+.anat-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Figure ---------- */
+
+.body-figure {
+  width: 100%;
+  max-width: 270px;
+  height: auto;
+  margin: auto 0;
+  overflow: visible;
+}
+
+.body-shell {
+  fill: #1b2545;
+  stroke: #6ea8ff;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: fill 0.3s;
+}
+
+.view-skeleton .body-shell {
+  fill: #101830;
+  stroke: rgba(110, 168, 255, 0.45);
+}
+
+.view-muscles .body-shell {
+  fill: #221c33;
+}
+
+.diaphragm {
+  fill: none;
+  stroke: rgba(110, 168, 255, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.body-breath {
+  transform-box: view-box;
+  transform-origin: 120px 200px;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.layer {
+  animation: layer-in 0.4s ease-out;
+}
+
+/* ---------- Parts (shared) ---------- */
+
+.part {
+  --part: #6ea8ff;
+  cursor: pointer;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.part-fill {
+  fill: color-mix(in srgb, var(--part) 55%, transparent);
+  stroke: var(--part);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transition: fill 0.2s;
+}
+
+.part-tube,
+.part-stroke {
+  fill: none;
+  stroke: var(--part);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.part-tube {
+  opacity: 0.85;
+}
+
+.part-detail {
+  fill: none;
+  stroke: color-mix(in srgb, var(--part) 55%, #0b1020);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+}
+
+.part-hole {
+  fill: #101830;
+  stroke: none;
+}
+
+.part.is-active,
+.part:focus-visible {
+  filter: drop-shadow(0 0 5px var(--part));
+}
+
+.part.is-active .part-fill,
+.part:focus-visible .part-fill {
+  fill: var(--part);
+  stroke: #ffffff;
+}
+
+.part.is-active .part-stroke,
+.part:focus-visible .part-stroke {
+  stroke: #ffffff;
+}
+
+/* ---------- Organs ---------- */
+
+.part-brain { animation: brain-glow 3s ease-in-out infinite; }
+.part-lungs { animation: lungs-breathe 4s ease-in-out infinite; }
+.part-stomach { animation: churn 5s ease-in-out infinite; }
+.part-small-intestine { animation: churn 6s ease-in-out infinite reverse; }
+.part-kidneys { animation: soft-pulse 3.5s ease-in-out infinite; }
+
+.heart-shape {
+  fill: #e66767;
+  stroke: #ff9a9a;
+  stroke-width: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: heartbeat var(--beat, 1s) ease-in-out infinite;
+}
+
+.part-heart.is-active .heart-shape,
+.part-heart:focus-visible .heart-shape {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+
+.heart-ring {
+  fill: none;
+  stroke: #e66767;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-ring var(--beat, 1s) ease-out infinite;
+}
+
+/* ---------- Muscles ---------- */
+
+.view-muscles .part {
+  --part: #d9625f;
+  animation: flex 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.35s);
+}
+
+.view-muscles .part-detail {
+  stroke: rgba(255, 210, 200, 0.45);
+}
+
+/* ---------- Skeleton ---------- */
+
+.view-skeleton .part {
+  --part: #e6e1d3;
+}
+
+.view-skeleton .part-fill {
+  fill: rgba(230, 225, 211, 0.85);
+  stroke: #b8b2a0;
+}
+
+.view-skeleton .part-stroke {
+  stroke: rgba(230, 225, 211, 0.9);
+}
+
+.view-skeleton .part-detail {
+  stroke: #6d6a5f;
+}
+
+.view-skeleton .part.is-active .part-fill {
+  fill: #ffffff;
+  stroke: #6ea8ff;
+}
+
+.view-skeleton .part.is-active .part-stroke {
+  stroke: #ffffff;
+}
+
+.view-skeleton .part.is-active {
+  filter: drop-shadow(0 0 5px #6ea8ff);
+}
+
+.scan-beam {
+  pointer-events: none;
+  animation: scan 4s linear infinite;
+}
+
+/* ---------- Info, ECG, BPM ---------- */
+
+.anat-info {
+  align-self: stretch;
+  min-height: 3.6em;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--text);
+  background: rgba(11, 16, 32, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.anat-hint {
+  color: var(--muted);
+}
+
+.ecg {
+  width: 100%;
+  height: 40px;
+}
+
+.ecg-line {
+  fill: none;
+  stroke: #0ca30c;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  animation: ecg-draw calc(var(--beat, 1s) * 2) linear infinite;
+}
+
+.health-bpm {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.health-bpm-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.health-bpm-unit {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+
+@keyframes layer-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lungs-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06, 1.04);
+  }
+}
+
+@keyframes brain-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px #e87ba4);
+  }
+}
+
+@keyframes churn {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  33% {
+    transform: rotate(1.5deg) scale(1.02);
+  }
+  66% {
+    transform: rotate(-1.5deg) scale(0.99);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes flex {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.025);
+    filter: brightness(1.25);
+  }
+}
+
+@keyframes scan {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(540px);
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  40%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.25);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes ecg-draw {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body-breath,
+  .layer,
+  .part,
+  .heart-shape,
+  .heart-ring,
+  .scan-beam,
+  .ecg-line {
+    animation: none !important;
+  }
+
+  .ecg-line {
+    stroke-dasharray: none;
+  }
+}
